@@ -8,7 +8,7 @@ exports.Add_User_data = async (req, res, next) => {
         const amount = parseInt(req.body.amount);
         const date = Date.now('2021-03-13 3:00:00');
         const id = Math.floor(Math.random() * 10000);
-
+        //date wise
         User_Model.create({
             id: id,
             userName: username,
@@ -48,7 +48,7 @@ exports.Get_User_data = async (req, res, next) => {
         if (param === 'Day') {
             console.log('1');
 
-            sequelize.query(`SELECT SUM("amount"),count(*)     
+            sequelize.query(`SELECT SUM("amount"),count(*), dd as Date     
             FROM generate_series
                     ( '2021-03-13'::timestamp 
                     , '2021-03-14'::timestamp
@@ -72,7 +72,7 @@ exports.Get_User_data = async (req, res, next) => {
            
 
         }else if (param === 'WEEK') {
-            sequelize.query(`SELECT SUM("amount"),count(*)     
+            sequelize.query(`SELECT SUM("amount"),count(*), dd as Date     
             FROM generate_series
                     ( '2021-03-07'::timestamp 
                     , '2021-03-13'::timestamp
@@ -91,7 +91,7 @@ exports.Get_User_data = async (req, res, next) => {
                     // We don't need spread here, since only the results will be returned for select queries
                 })
         }else if(param === 'MONTH') {
-            sequelize.query(`SELECT SUM("amount"),count(*)     
+            sequelize.query(`SELECT SUM("amount"),count(*), dd as Date     
             FROM generate_series
                     ( '2021-03-01'::timestamp 
                     , '2021-03-31'::timestamp
